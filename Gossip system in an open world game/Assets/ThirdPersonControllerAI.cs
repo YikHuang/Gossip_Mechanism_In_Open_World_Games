@@ -121,7 +121,7 @@ namespace StarterAssets
 		{
             playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
             playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
-            Debug.Log(playerInSightRange);
+            //Debug.Log(playerInSightRange);
             //if (!playerInSightRange && !playerInAttackRange) Patroling();
             Patroling();
 			// if(Target != null)
