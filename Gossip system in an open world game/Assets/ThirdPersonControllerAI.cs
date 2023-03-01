@@ -119,6 +119,8 @@ namespace StarterAssets
 
 		private void Update()
 		{
+            if (DialogueManager.GetInstance().isDialoguePlaying) return;
+            
             playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
             playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
             //Debug.Log(playerInSightRange);
