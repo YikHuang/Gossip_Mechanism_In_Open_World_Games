@@ -4,12 +4,15 @@ using UnityEngine;
 using TMPro;
 using Ink.Runtime;
 using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
 
 //This is a singleton class
 public class DialogueManager : MonoBehaviour
 {
     [SerializeField] private GameObject DialoguePanel;
+    [SerializeField] private GameObject CharacterTag;
     [SerializeField] private TextMeshProUGUI DialogueText;
+    [SerializeField] private TextMeshProUGUI CharacterName;
     [SerializeField] private GameObject[] Choices;
 
     private TextMeshProUGUI[] ChoicesText;
@@ -17,6 +20,7 @@ public class DialogueManager : MonoBehaviour
     public bool isDialoguePlaying {get; private set;}
     private Story CurrentStory; 
     private bool submitPressed = false;
+    private bool WaitForChoice = false;
     
     private void Awake()
     {
@@ -34,6 +38,8 @@ public class DialogueManager : MonoBehaviour
     {
         isDialoguePlaying = false;
         DialoguePanel.SetActive(false);
+        CharacterTag.SetActive(false);
+
         ChoicesText = new TextMeshProUGUI[Choices.Length];
         int index = 0;
         foreach(GameObject c in Choices)
@@ -44,17 +50,16 @@ public class DialogueManager : MonoBehaviour
     }
     private void Update()
     {
-        if(!isDialoguePlaying) return;
-        if(GetSubmitPressed())
-        {
-            ContinueStory();
-        }
+        if(!isDialoguePlaying || WaitForChoice && !GetSubmitPressed()) return;
+        ContinueStory();
     }
-    public void EnterDialogueMode(TextAsset InkJson)
+    public void EnterDialogueMode(string CharName, TextAsset InkJson)
     {
         CurrentStory = new Story(InkJson.text);
         isDialoguePlaying = true;
         DialoguePanel.SetActive(true);
+        CharacterTag.SetActive(true);
+        CharacterName.text = CharName;
         ContinueStory();
         
     }
@@ -62,16 +67,22 @@ public class DialogueManager : MonoBehaviour
     {
         isDialoguePlaying = false;
         DialoguePanel.SetActive(false);
-        DialogueText .text = "";
+        CharacterTag.SetActive(false);
+        DialogueText.text = "";
+        CharacterName.text = "";
     }
     private void ContinueStory()
     {
+        WaitForChoice = false;
         if(CurrentStory.canContinue)
         {
-            DialogueText.text = CurrentStory.Continue();
+            string c = CurrentStory.Continue();
+            Debug.Log("Story can continue"+ c);
+            DialogueText.text = c;
             DisplayChoices();
         }
         else{
+            Debug.Log("Exit dialogue!!");
             ExitDialogueMode();
         }
     }
@@ -99,9 +110,18 @@ public class DialogueManager : MonoBehaviour
     private void DisplayChoices()
     {
         List<Choice> CurrentChoices = CurrentStory.currentChoices;
-        if(CurrentChoices.Count < Choices.Length)
+        
+        // No choices available
+        if(CurrentChoices == null || CurrentChoices.Count == 0)
         {
-            Debug.LogError("More choices were given than UI can support. Number of choices given:"+ CurrentChoices.Count);
+            Debug.Log("No choices anymore!!");
+            return;
+        }
+        Debug.Log("choice:"+CurrentChoices[0].text);
+        WaitForChoice = true;
+        if(CurrentChoices.Count > Choices.Length)
+        {
+            Debug.LogWarning("More choices were given than UI can support. Number of choices given:"+ CurrentChoices.Count);
         }
         int i = 0;
         foreach(Choice c in CurrentChoices)
@@ -115,5 +135,28 @@ public class DialogueManager : MonoBehaviour
         {
             Choices[i].gameObject.SetActive(false); 
         }
+        StartCoroutine(SelectFirstChoice());
+    }
+    private void HideChoices() 
+    {
+        int i = 0;
+        foreach(GameObject c in Choices)
+        {
+            c.SetActive(false);
+            ChoicesText[i].text = "";
+            i++; 
+        }
+    }
+    private IEnumerator SelectFirstChoice()
+    {
+        EventSystem.current.SetSelectedGameObject(null);
+        yield return new WaitForEndOfFrame();
+        EventSystem.current.SetSelectedGameObject(Choices[0].gameObject);
+    }
+    public void MakeChoice(int ChoiceIndex)
+    {
+        CurrentStory.ChooseChoiceIndex(ChoiceIndex);
+        submitPressed = true;
+        HideChoices();
     }
 }
