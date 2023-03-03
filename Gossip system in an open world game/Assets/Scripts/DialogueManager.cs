@@ -21,6 +21,8 @@ public class DialogueManager : MonoBehaviour
     private Story CurrentStory; 
     private bool submitPressed = false;
     private bool WaitForChoice = false;
+    //private bool submitPressed = false;
+    private bool WaitForClicked = false;
     
     private void Awake()
     {
@@ -51,6 +53,10 @@ public class DialogueManager : MonoBehaviour
     private void Update()
     {
         if(!isDialoguePlaying || WaitForChoice && !GetSubmitPressed()) return;
+        if(WaitForClicked){
+            ProceedStory();
+            if(!GetSubmitPressed()) return;
+        }
         ContinueStory();
     }
     public void EnterDialogueMode(string CharName, TextAsset InkJson)
@@ -73,7 +79,9 @@ public class DialogueManager : MonoBehaviour
     }
     private void ContinueStory()
     {
+        Debug.Log("Continuing..");
         WaitForChoice = false;
+        WaitForClicked = false;
         if(CurrentStory.canContinue)
         {
             string c = CurrentStory.Continue();
@@ -114,6 +122,7 @@ public class DialogueManager : MonoBehaviour
         // No choices available
         if(CurrentChoices == null || CurrentChoices.Count == 0)
         {
+            WaitForClicked = true;
             Debug.Log("No choices anymore!!");
             return;
         }
@@ -158,5 +167,12 @@ public class DialogueManager : MonoBehaviour
         CurrentStory.ChooseChoiceIndex(ChoiceIndex);
         submitPressed = true;
         HideChoices();
+    }
+    public void ProceedStory()
+    {
+        if(Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            submitPressed = true;
+        }
     }
 }

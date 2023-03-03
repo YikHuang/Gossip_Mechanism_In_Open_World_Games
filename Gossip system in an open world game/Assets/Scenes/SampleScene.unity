@@ -4780,6 +4780,7 @@ GameObject:
   - component: {fileID: 735968011}
   - component: {fileID: 735968010}
   - component: {fileID: 735968015}
+  - component: {fileID: 735968016}
   m_Layer: 0
   m_Name: Doozy
   m_TagString: Player
@@ -4937,6 +4938,19 @@ MonoBehaviour:
   ItemName: Doozy
   IsPlayerInRange: 0
   InkJson: {fileID: 0}
+--- !u!65 &735968016
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 735968008}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 9, y: 9, z: 9}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &746504721
 GameObject:
   m_ObjectHideFlags: 0
@@ -5081,6 +5095,7 @@ GameObject:
   - component: {fileID: 764585922}
   - component: {fileID: 764585921}
   - component: {fileID: 764585926}
+  - component: {fileID: 764585927}
   m_Layer: 0
   m_Name: Eric
   m_TagString: Player
@@ -5238,6 +5253,19 @@ MonoBehaviour:
   ItemName: Eric
   IsPlayerInRange: 0
   InkJson: {fileID: 0}
+--- !u!65 &764585927
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 764585919}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 9, y: 9, z: 9}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &781083255
 GameObject:
   m_ObjectHideFlags: 0
@@ -12919,6 +12947,7 @@ GameObject:
   - component: {fileID: 1802437855}
   - component: {fileID: 1802437854}
   - component: {fileID: 1802437859}
+  - component: {fileID: 1802437860}
   m_Layer: 0
   m_Name: Elviss
   m_TagString: Player
@@ -13076,6 +13105,19 @@ MonoBehaviour:
   ItemName: Elviss
   IsPlayerInRange: 0
   InkJson: {fileID: 0}
+--- !u!65 &1802437860
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1802437852}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 9, y: 9, z: 9}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1804527746
 GameObject:
   m_ObjectHideFlags: 0
@@ -14312,6 +14354,7 @@ GameObject:
   - component: {fileID: 2023039136}
   - component: {fileID: 2023039135}
   - component: {fileID: 2023039140}
+  - component: {fileID: 2023039141}
   m_Layer: 0
   m_Name: Gramma
   m_TagString: Player
@@ -14469,6 +14512,19 @@ MonoBehaviour:
   ItemName: Gramma
   IsPlayerInRange: 0
   InkJson: {fileID: 0}
+--- !u!65 &2023039141
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2023039133}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 9, y: 9, z: 9}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2024566670
 GameObject:
   m_ObjectHideFlags: 0
@@ -16989,6 +17045,7 @@ GameObject:
   - component: {fileID: 7936707629919088016}
   - component: {fileID: 7936707629919088018}
   - component: {fileID: 7936707629919088019}
+  - component: {fileID: 7936707629919088020}
   m_Layer: 8
   m_Name: Timmy
   m_TagString: Player
@@ -22093,6 +22150,7 @@ GameObject:
   - component: {fileID: 4457870841157400772}
   - component: {fileID: 8820584850264402839}
   - component: {fileID: 8820584850264402840}
+  - component: {fileID: 8820584850264402841}
   m_Layer: 0
   m_Name: Claire
   m_TagString: Player
@@ -23427,6 +23485,19 @@ MonoBehaviour:
   ItemName: Timmy
   IsPlayerInRange: 0
   InkJson: {fileID: 0}
+--- !u!65 &7936707629919088020
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1133461302809620422}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 9, y: 9, z: 9}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &7943114607492689319
 Transform:
   m_ObjectHideFlags: 0
@@ -24241,6 +24312,19 @@ MonoBehaviour:
   ItemName: Claire
   IsPlayerInRange: 0
   InkJson: {fileID: 0}
+--- !u!65 &8820584850264402841
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6648312969961274002}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 9, y: 9, z: 9}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &8823472999294156639
 Transform:
   m_ObjectHideFlags: 0
