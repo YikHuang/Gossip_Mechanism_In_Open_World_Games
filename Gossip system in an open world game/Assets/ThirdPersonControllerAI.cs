@@ -82,22 +82,17 @@ namespace StarterAssets
 		private NavMeshAgent thisAgent;
 
         //Fuhsin's modification
-        public LayerMask whatIsGround, whatIsPlayer;
-        public float health;
+        public LayerMask whatIsGround;
 
         //Patroling
         public Vector3 walkPoint;
         bool walkPointSet;
         public float walkPointRange;
 
-        //Attacking
-        public float timeBetweenAttacks;
-        bool alreadyAttacked;
-        public GameObject projectile;
-
-        //States
-        public float sightRange, attackRange;
-        public bool playerInSightRange, playerInAttackRange;
+        //Approaching
+        bool IsApproached= false;
+        bool IsApproaching = false;
+        private float CoolDownTime = 0f;
 
 		private void Start()
 		{
@@ -119,20 +114,24 @@ namespace StarterAssets
 
 		private void Update()
 		{
-            if (DialogueManager.GetInstance().isDialoguePlaying){
+            // Force NPC to stop moving while Dialogue is playing
+            if (DialogueManager.GetInstance().isDialoguePlaying){ 
                 Move(thisAgent.desiredVelocity.normalized, 0f);
                 return;
             }
+
+            CoolDownTime -= Time.deltaTime;
+            if (CoolDownTime <= 0.0f) IsApproached = false;
             
-            playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
-            playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
-            //Debug.Log(playerInSightRange);
-            //if (!playerInSightRange && !playerInAttackRange) Patroling();
-            Patroling();
-			// if(Target != null)
-            // {
-			// 	thisAgent.SetDestination(Target.position);
-			// }
+            InteractableObject InterObj = transform.GetComponent<InteractableObject>();
+            if(InterObj.IsNpcInRange && !IsApproached && !IsApproaching)
+            {
+                Debug.Log(gameObject.name+" Approaching npc...");
+                ApproachNpc(InterObj.Npc);
+                IsApproaching = true;
+                
+            } 
+            else Patroling();
 
 			JumpAndGravity();
 			GroundedCheck();
@@ -143,7 +142,18 @@ namespace StarterAssets
 			if (thisAgent.remainingDistance > thisAgent.stoppingDistance)
 				Move(thisAgent.desiredVelocity.normalized, thisAgent.desiredVelocity.magnitude);
 			else
-				Move(thisAgent.desiredVelocity.normalized, 0f);
+            {
+                Move(thisAgent.desiredVelocity.normalized, 0f);
+                if(IsApproaching)
+                {
+                    Debug.Log(gameObject.name+" Approached!");
+                    IsApproaching=false;
+                    IsApproached=true;
+                    CoolDownTime = 10f;
+                    transform.GetComponent<SocialSystem>().DisplayCurrentStatus();
+                }
+            }
+				
 		}
         private void Patroling()
         {
@@ -314,5 +324,12 @@ namespace StarterAssets
 			// when selected, draw a gizmo in the position of, and matching radius of, the grounded collider
 			Gizmos.DrawSphere(new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z), GroundedRadius);
 		}
+        private void ApproachNpc(GameObject Npc)
+        {
+            thisAgent.SetDestination(Npc.transform.position);
+            Debug.Log(gameObject.name+" Start gossiping....");
+            var NpcNames = new string[]{Npc.name, gameObject.name};
+            GossipManager.GetInstance().StartGossip(gameObject.name, Npc.name);
+        }
 	}
 }

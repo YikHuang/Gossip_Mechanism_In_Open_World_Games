@@ -6,7 +6,12 @@ public class InteractableObject : MonoBehaviour
 {
     public string ItemName;
     public bool IsPlayerInRange;
+    public bool IsNpcInRange;
+    public GameObject Npc;
+    public Vector3 NpcPos;
     [SerializeField] private TextAsset InkJson;
+    [SerializeField] private LayerMask NpcLayer;
+    [SerializeField] private LayerMask PlayerLayer;
 
     void Update()
     {
@@ -24,11 +29,22 @@ public class InteractableObject : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        IsPlayerInRange = true;
+        var obj = other.gameObject;
+        if(1 << obj.layer == PlayerLayer) IsPlayerInRange = true;
+        else if(1 << obj.layer == NpcLayer && obj.transform.position != transform.position)
+        {
+            IsNpcInRange = true;
+            Npc = obj;
+            //NpcPos = Npc.transform.position;
+            //Debug.Log("Detect a NPC"+obj.transform.position+"My pos:"+transform.position);
+        }
     }
     private void OnTriggerExit(Collider other)
     {
-        IsPlayerInRange = false;
+        var obj = other.gameObject;
+        if(1 << obj.layer == PlayerLayer) IsPlayerInRange = false;
+        else if(1 << obj.layer == NpcLayer && obj.transform.position != transform.position) IsNpcInRange = false;
+            
     }
 
 }
