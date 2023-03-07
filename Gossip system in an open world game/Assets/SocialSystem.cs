@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 //This system store each NPC's social status and traits.
 //e.g. affinity value
@@ -23,12 +24,20 @@ public class SocialSystem : MonoBehaviour
     };
     private IDictionary<string, IDictionary<string, float>> FunctionMap = new Dictionary<string, IDictionary<string, float>>();
     public List<string> SocialActionHistory = new List<string>();
+    [SerializeField] GameObject SocialStatusBubble;
+    [SerializeField] TextMeshPro SocialStatusText;
+    static float STATUS_DISPLAY_TIME = 5f;
+    private float CountDownTime = 0;
 
     private void Start()
     {
         //Register Social Actions here:
         RegisterSocialAction();
-        //SocialActionHistory.Add("Praise");
+        SocialStatusBubble.SetActive(false);
+    }
+    private void Update()
+    {
+        if(IsTimeUp()) SocialStatusBubble.SetActive(false);
     }
     private void RegisterSocialAction()
     {
@@ -46,7 +55,7 @@ public class SocialSystem : MonoBehaviour
         CharaterStatus[status]+= amt;
         return true;
     }
-    private void ExecSocialAction(string Action, bool isGossip, float GossipDiscount=1) //If accept by gossip, apply gossip a discount
+    public void ExecSocialAction(string Action, bool isGossip=false, float GossipDiscount=1) //If accept by gossip, apply gossip a discount
     {
         var Func = FunctionMap[Action];
         foreach(var r in Func)
@@ -59,21 +68,39 @@ public class SocialSystem : MonoBehaviour
             }       
         }
         if(!isGossip) SocialActionHistory.Add(Action);
+        
+        //Display Social Status After changed
+        DisplaySocialStatus();
     }
     public void AcceptGossip(string Action, float GossipDiscount=0.5f)
     {
         ExecSocialAction(Action, true, GossipDiscount);
     }
-    public void DisplayCurrentStatus()
-    {
-        foreach(var r in CharaterStatus)
-        {
-            Debug.Log(gameObject.name+" Status key"+r.Key+"val:"+r.Value);      
-        }
-    }
     public void ClearSocialHistory()
     {
         SocialActionHistory.Clear();
+    }
+    private void DisplaySocialStatus()
+    {
+        SocialStatusBubble.SetActive(true);
+        string Temp = "";
+        foreach(var r in CharaterStatus)
+        {
+            Temp += r.Key+": "+r.Value+"<br>";
+            //Debug.Log(gameObject.name+" Status key"+r.Key+"val:"+r.Value);      
+        }
+        SocialStatusText.text = Temp;
+        SetUpTimer(STATUS_DISPLAY_TIME);
+    }
+    private void SetUpTimer(float c)
+    {
+        CountDownTime = c;
+    }
+    private bool IsTimeUp()
+    {
+        CountDownTime -= Time.deltaTime;
+        if (CountDownTime <= 0.0f) return true;
+        return false;
     }
 
 }

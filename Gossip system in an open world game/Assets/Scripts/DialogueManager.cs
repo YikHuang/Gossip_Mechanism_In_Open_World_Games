@@ -21,8 +21,11 @@ public class DialogueManager : MonoBehaviour
     private Story CurrentStory; 
     private bool submitPressed = false;
     private bool WaitForChoice = false;
-    //private bool submitPressed = false;
     private bool WaitForClicked = false;
+    private const string SPEAKER_TAG = "speaker";
+    private const string SOCIAL_ACTION_TAG = "SocialAction";
+    private  string MAIN_CHARACTER_TAG = "You"; 
+    private SocialSystem DialogueNPC;
     
     private void Awake()
     {
@@ -65,7 +68,8 @@ public class DialogueManager : MonoBehaviour
         isDialoguePlaying = true;
         DialoguePanel.SetActive(true);
         CharacterTag.SetActive(true);
-        CharacterName.text = CharName;
+        //CharacterName.text = CharName;
+        DialogueNPC = GameObject.Find(CharName).GetComponent<SocialSystem>();
         ContinueStory();
         
     }
@@ -75,11 +79,10 @@ public class DialogueManager : MonoBehaviour
         DialoguePanel.SetActive(false);
         CharacterTag.SetActive(false);
         DialogueText.text = "";
-        CharacterName.text = "";
+        //CharacterName.text = "";
     }
     private void ContinueStory()
     {
-        Debug.Log("Continuing..");
         WaitForChoice = false;
         WaitForClicked = false;
         if(CurrentStory.canContinue)
@@ -88,10 +91,43 @@ public class DialogueManager : MonoBehaviour
             Debug.Log("Story can continue"+ c);
             DialogueText.text = c;
             DisplayChoices();
+            HandleTags(CurrentStory.currentTags);
         }
         else{
             Debug.Log("Exit dialogue!!");
             ExitDialogueMode();
+        }
+    }
+    private void HandleTags(List<string> currentTags)
+    {
+        // loop through each tag and handle it accordingly
+        foreach (string tag in currentTags) 
+        {
+            // parse the tag
+            string[] splitTag = tag.Split(':');
+            if (splitTag.Length != 2) 
+            {
+                Debug.LogWarning("Tag could not be appropriately parsed: " + tag);
+                continue;
+            }
+            string tagKey = splitTag[0].Trim();
+            string tagValue = splitTag[1].Trim();
+            
+            // handle the tag
+            switch (tagKey) 
+            {
+                case SPEAKER_TAG:
+                    if(tagValue == "MainCharacter") tagValue = MAIN_CHARACTER_TAG;
+                    CharacterName.text = tagValue;
+                    break;
+                case SOCIAL_ACTION_TAG:
+                    Debug.Log("ExecSocialAction"+ tagValue);
+                    DialogueNPC.ExecSocialAction(tagValue);
+                    break;
+                default:
+                    Debug.LogWarning("Tag came in but is not currently being handled: " + tag);
+                    break;
+            }
         }
     }
     public void SubmitPressed(InputAction.CallbackContext context)

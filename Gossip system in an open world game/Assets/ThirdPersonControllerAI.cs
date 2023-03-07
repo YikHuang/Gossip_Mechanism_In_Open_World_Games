@@ -82,6 +82,7 @@ namespace StarterAssets
 		private NavMeshAgent thisAgent;
 
         //Fuhsin's modification
+        [SerializeField] GameObject ThinkBubble;
         public LayerMask whatIsGround;
 
         //Patroling
@@ -101,6 +102,8 @@ namespace StarterAssets
 
 			thisAgent = GetComponent<NavMeshAgent>();
 			thisAgent.updateRotation = false;
+
+            ThinkBubble.SetActive(false);
 
 			if(Sprinting) thisAgent.speed = SprintSpeed;
 			else thisAgent.speed = MoveSpeed;
@@ -150,7 +153,8 @@ namespace StarterAssets
                     IsApproaching=false;
                     IsApproached=true;
                     CoolDownTime = 10f;
-                    transform.GetComponent<SocialSystem>().DisplayCurrentStatus();
+                    //transform.GetComponent<SocialSystem>().DisplayCurrentStatus();
+                    ThinkBubble.SetActive(false);
                 }
             }
 				
@@ -329,7 +333,9 @@ namespace StarterAssets
             thisAgent.SetDestination(Npc.transform.position);
             Debug.Log(gameObject.name+" Start gossiping....");
             var NpcNames = new string[]{Npc.name, gameObject.name};
+            ThinkBubble.SetActive(true);
             GossipManager.GetInstance().StartGossip(gameObject.name, Npc.name);
+            
         }
 	}
 }
