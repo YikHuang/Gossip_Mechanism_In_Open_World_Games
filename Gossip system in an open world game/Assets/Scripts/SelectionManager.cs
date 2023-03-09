@@ -2,16 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class SelectionManager : MonoBehaviour
 {
+    public static SelectionManager Instance {set;get;}
+    [SerializeField] private TextMeshProUGUI InteractionInfo;
+    public bool onTarget;
 
-    public GameObject interaction_Info_UI;
-    Text interaction_text;
 
+    void Awake()
+    {
+        if(Instance != null & Instance != this) Destroy(gameObject);
+        else Instance = this;
+    }
     private void Start()
     {
-        interaction_text = interaction_Info_UI.GetComponent<Text>();
+        InteractionInfo.text = "";
+        onTarget = false;
     }
 
     void Update()
@@ -21,17 +29,29 @@ public class SelectionManager : MonoBehaviour
         if (Physics.Raycast(ray, out hit))
         {
             var selectionTransform = hit.transform;
+            InteractableObject selectedObj = selectionTransform.GetComponent<InteractableObject>();
 
-            if (selectionTransform.GetComponent<InteractableObject>())
+            if (selectedObj && selectedObj.IsPlayerInRange)
             {
-                interaction_text.text = selectionTransform.GetComponent<InteractableObject>().GetItemName();
-                interaction_Info_UI.SetActive(true);
+                InteractionInfo.transform.position = Input.mousePosition;
+                InteractionInfo.text = selectedObj.GetItemName();            
+                onTarget = true;
             }
             else
             {
-                interaction_Info_UI.SetActive(false);
+                InteractionInfo.text = "";
+                onTarget = false;
             }
 
         }
+        else
+        {
+            InteractionInfo.text = "";
+            onTarget = false;
+        }
+    }
+    public static SelectionManager GetInstance()
+    {
+        return Instance;
     }
 }
