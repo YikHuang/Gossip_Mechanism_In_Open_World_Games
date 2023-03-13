@@ -117,8 +117,9 @@ namespace StarterAssets
 
 		private void Update()
 		{
+            DialogueManager dm = DialogueManager.GetInstance();
             // Force NPC to stop moving while Dialogue is playing
-            if (DialogueManager.GetInstance().isDialoguePlaying){ 
+            if (dm.isDialoguePlaying && gameObject.name == dm.NPCName){ 
                 Move(thisAgent.desiredVelocity.normalized, 0f);
                 return;
             }
@@ -129,7 +130,7 @@ namespace StarterAssets
             InteractableObject InterObj = transform.GetComponent<InteractableObject>();
             if(InterObj.IsNpcInRange && !IsApproached && !IsApproaching)
             {
-                Debug.Log(gameObject.name+" Approaching npc...");
+                //Debug.Log(gameObject.name+" Approaching npc...");
                 ApproachNpc(InterObj.Npc);
                 IsApproaching = true;
                 
@@ -149,7 +150,7 @@ namespace StarterAssets
                 Move(thisAgent.desiredVelocity.normalized, 0f);
                 if(IsApproaching)
                 {
-                    Debug.Log(gameObject.name+" Approached!");
+                    //Debug.Log(gameObject.name+" Approached!");
                     IsApproaching=false;
                     IsApproached=true;
                     CoolDownTime = 10f;
@@ -331,7 +332,7 @@ namespace StarterAssets
         private void ApproachNpc(GameObject Npc)
         {
             thisAgent.SetDestination(Npc.transform.position);
-            Debug.Log(gameObject.name+" Start gossiping....");
+            //Debug.Log(gameObject.name+" Start gossiping....");
             var NpcNames = new string[]{Npc.name, gameObject.name};
             ThinkBubble.SetActive(true);
             GossipManager.GetInstance().StartGossip(gameObject.name, Npc.name);

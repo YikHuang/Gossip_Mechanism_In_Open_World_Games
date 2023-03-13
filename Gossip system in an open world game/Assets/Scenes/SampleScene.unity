@@ -1400,7 +1400,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 159.2, y: 36.4}
+  m_AnchoredPosition: {x: 159.2, y: 0}
   m_SizeDelta: {x: 185.821, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &236413437
@@ -7588,7 +7588,7 @@ MonoBehaviour:
   IsNpcInRange: 0
   Npc: {fileID: 0}
   NpcPos: {x: 0, y: 0, z: 0}
-  InkJson: {fileID: 0}
+  InkJson: {fileID: 4900000, guid: 56fe540a0ba3d45878ce31bcb6fb8ade, type: 3}
   NpcLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -8789,6 +8789,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6fe7649c7e6c46a58904b2e94dd4980, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  loadGlobalJson: {fileID: 4900000, guid: 7fcc6a859f1984a20a65322b8877c091, type: 3}
   DialoguePanel: {fileID: 2107174068}
   CharacterTag: {fileID: 95819553}
   DialogueText: {fileID: 1341818854}
@@ -8797,6 +8798,7 @@ MonoBehaviour:
   - {fileID: 1651186376}
   - {fileID: 1230278352}
   - {fileID: 236413435}
+  NPCName: 
 --- !u!1 &900110053
 GameObject:
   m_ObjectHideFlags: 0
@@ -12291,7 +12293,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_UiScaleMode: 0
   m_ReferencePixelsPerUnit: 100
-  m_ScaleFactor: 1
+  m_ScaleFactor: 2
   m_ReferenceResolution: {x: 800, y: 600}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
@@ -12855,7 +12857,7 @@ MonoBehaviour:
   IsNpcInRange: 0
   Npc: {fileID: 0}
   NpcPos: {x: 0, y: 0, z: 0}
-  InkJson: {fileID: 4900000, guid: c6f2c806ca3274695a3f6479dbd8a374, type: 3}
+  InkJson: {fileID: 0}
   NpcLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -13093,6 +13095,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InteractionInfo: {fileID: 1436276242}
   onTarget: 0
+  TargetName: 
 --- !u!4 &1225852904
 Transform:
   m_ObjectHideFlags: 0
@@ -13145,7 +13148,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 13.9, y: -13}
+  m_AnchoredPosition: {x: 13.9, y: -50}
   m_SizeDelta: {x: 185.665, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1230278354
@@ -17392,7 +17395,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -182.58087, y: -13}
+  m_AnchoredPosition: {x: -182.58087, y: -50}
   m_SizeDelta: {x: 185.5739, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1651186378
@@ -22370,7 +22373,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1133461302809620422}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.76153094, y: -0.4384617, z: -0.653845}
+  m_LocalPosition: {x: -0.76153094, y: -0.4384617, z: 6.31}
   m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -29805,7 +29808,7 @@ MonoBehaviour:
   IsNpcInRange: 0
   Npc: {fileID: 0}
   NpcPos: {x: 0, y: 0, z: 0}
-  InkJson: {fileID: 0}
+  InkJson: {fileID: 4900000, guid: c6f2c806ca3274695a3f6479dbd8a374, type: 3}
   NpcLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -30656,13 +30659,13 @@ MonoBehaviour:
   IsNpcInRange: 0
   Npc: {fileID: 0}
   NpcPos: {x: 0, y: 0, z: 0}
-  InkJson: {fileID: 0}
+  InkJson: {fileID: 4900000, guid: 3e4bbe81345f9433d901a7307fc566b5, type: 3}
   NpcLayer:
     serializedVersion: 2
     m_Bits: 8
   PlayerLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1
 --- !u!65 &8820584850264402841
 BoxCollider:
   m_ObjectHideFlags: 0

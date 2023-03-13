@@ -10,17 +10,46 @@ public class SocialSystem : MonoBehaviour
     //[SerializeField] private int affinity;
     public IDictionary<string, float> CharaterStatus = new Dictionary<string, float>
     {
-        {"Affinity", 0f}
+        {"Affinity", 0f},
+        {"Trust", 0f},
+        {"Admiration", 0f}
     };
     
     // Definition of impact on some social actions
     private IDictionary<string, float> Insult= new Dictionary<string, float>
     {
-        {"Affinity", -3f}
+        {"Affinity", -5f},
+        {"Trust", -5f},
+        {"Admiration", -5f}
     };
     private IDictionary<string, float> Praise = new Dictionary<string, float>
     {
-        {"Affinity", 3f}
+        {"Affinity", 3f},
+        {"Trust", 3f}
+    };
+    private IDictionary<string, float> Greeting = new Dictionary<string, float>
+    {
+        {"Affinity", 1f}
+    };
+    private IDictionary<string, float> StraightForward = new Dictionary<string, float>
+    {
+        {"Affinity", -2f}
+    };
+    private IDictionary<string, float> Bonding = new Dictionary<string, float>
+    {
+        {"Affinity", 5f},
+        {"Trust", 3f}
+    };
+    private IDictionary<string, float> Rejection = new Dictionary<string, float>
+    {
+        {"Affinity", -2f},
+        {"Trust", -2f}
+    };
+    private IDictionary<string, float> Help = new Dictionary<string, float>
+    {
+        {"Affinity", 5f},
+        {"Trust", 5f},
+        {"Admiration", 5f}
     };
     private IDictionary<string, IDictionary<string, float>> FunctionMap = new Dictionary<string, IDictionary<string, float>>();
     public List<string> SocialActionHistory = new List<string>();
@@ -43,15 +72,22 @@ public class SocialSystem : MonoBehaviour
     {
         FunctionMap.Add("Insult", Insult);
         FunctionMap.Add("Praise", Praise);
+        FunctionMap.Add("Greeting", Greeting);
+        FunctionMap.Add("StraightForward", StraightForward);
+        FunctionMap.Add("Bonding", Bonding);
+        FunctionMap.Add("Rejection", Rejection);
+        FunctionMap.Add("Help", Help);
     }
     public bool StatusChange(string status, float amt)
     {
         if(!CharaterStatus.ContainsKey(status)) return false;
-        if((CharaterStatus[status]+amt) < 0) //In case for negative vals
-        {
-            CharaterStatus[status] = 0;
-            return true;
-        }
+        // if((CharaterStatus[status]+amt) < 0) //In case for negative vals
+        // {
+        //     CharaterStatus[status] = 0;
+        //     return true;
+        // }
+
+        //Negative val is acceptable!
         CharaterStatus[status]+= amt;
         return true;
     }

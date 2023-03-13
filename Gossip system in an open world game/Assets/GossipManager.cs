@@ -28,7 +28,7 @@ public class GossipManager : MonoBehaviour
         }
         Debug.Log("Number of NPCs"+NPCs.Count);
     }
-    public void StartGossip(string Spreader, string Receiver) //Allows Group gossip!!!
+    public void StartGossip(string Spreader, string Receiver)
     {
         SocialSystem SpreaderSys = NPCs[Spreader].GetComponent<SocialSystem>();
         SocialSystem ReceiverSys = NPCs[Receiver].GetComponent<SocialSystem>();

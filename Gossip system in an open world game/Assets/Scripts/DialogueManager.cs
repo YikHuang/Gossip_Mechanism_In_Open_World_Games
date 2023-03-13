@@ -9,6 +9,9 @@ using UnityEngine.EventSystems;
 //This is a singleton class
 public class DialogueManager : MonoBehaviour
 {
+    [Header("Global Ink File")]
+    [SerializeField] private TextAsset loadGlobalJson;
+    
     [SerializeField] private GameObject DialoguePanel;
     [SerializeField] private GameObject CharacterTag;
     [SerializeField] private TextMeshProUGUI DialogueText;
@@ -25,7 +28,10 @@ public class DialogueManager : MonoBehaviour
     private const string SPEAKER_TAG = "speaker";
     private const string SOCIAL_ACTION_TAG = "SocialAction";
     private  string MAIN_CHARACTER_TAG = "You"; 
+    public string NPCName="";
     private SocialSystem DialogueNPC;
+    private DialogueVariables dialogueVariables;
+    private InkExternalFunctions InkEx;
     
     private void Awake()
     {
@@ -34,6 +40,8 @@ public class DialogueManager : MonoBehaviour
             Debug.LogWarning("Found more than one instance");
         }
         Instance = this;
+        dialogueVariables = new DialogueVariables(loadGlobalJson);
+        InkEx = new InkExternalFunctions();
     }
     public static DialogueManager GetInstance()
     {
@@ -52,10 +60,13 @@ public class DialogueManager : MonoBehaviour
              ChoicesText[index] = c.GetComponentInChildren<TextMeshProUGUI>();
              index++;
         }
+        HideChoices();
     }
     private void Update()
     {
-        if(!isDialoguePlaying || WaitForChoice && !GetSubmitPressed()) return;
+        if(!isDialoguePlaying || WaitForChoice && !GetSubmitPressed()){
+            return;
+        } 
         if(WaitForClicked){
             ProceedStory();
             if(!GetSubmitPressed()) return;
@@ -64,12 +75,20 @@ public class DialogueManager : MonoBehaviour
     }
     public void EnterDialogueMode(string CharName, TextAsset InkJson)
     {
+        NPCName = CharName;
         CurrentStory = new Story(InkJson.text);
         isDialoguePlaying = true;
         DialoguePanel.SetActive(true);
         CharacterTag.SetActive(true);
-        //CharacterName.text = CharName;
-        DialogueNPC = GameObject.Find(CharName).GetComponent<SocialSystem>();
+
+        // Load NPC status into ink
+        DialogueNPC = GameObject.Find(NPCName).GetComponent<SocialSystem>();
+        LoadCharacterStatus();
+        float temp = (float)CurrentStory.variablesState["Affinity"];
+        Debug.Log("After load:"+ temp);
+
+        dialogueVariables.StartListening(CurrentStory);
+        InkEx.Bind(CurrentStory);
         ContinueStory();
         
     }
@@ -79,7 +98,8 @@ public class DialogueManager : MonoBehaviour
         DialoguePanel.SetActive(false);
         CharacterTag.SetActive(false);
         DialogueText.text = "";
-        //CharacterName.text = "";
+        dialogueVariables.StopListening(CurrentStory);
+        InkEx.Unbind(CurrentStory);
     }
     private void ContinueStory()
     {
@@ -88,10 +108,13 @@ public class DialogueManager : MonoBehaviour
         if(CurrentStory.canContinue)
         {
             string c = CurrentStory.Continue();
-            Debug.Log("Story can continue"+ c);
-            DialogueText.text = c;
-            DisplayChoices();
-            HandleTags(CurrentStory.currentTags);
+            if(c.Length > 0)
+            {
+                Debug.Log("Story can continue"+ c + c.Length);
+                DialogueText.text = c;
+                DisplayChoices();
+                HandleTags(CurrentStory.currentTags);
+            }
         }
         else{
             Debug.Log("Exit dialogue!!");
@@ -206,9 +229,30 @@ public class DialogueManager : MonoBehaviour
     }
     public void ProceedStory()
     {
-        if(Input.GetKeyDown(KeyCode.Mouse0))
+        if(Input.GetKeyDown(KeyCode.Return))
         {
             submitPressed = true;
+            Debug.Log("player clicked to proceed");
         }
     }
+    public Ink.Runtime.Object GetVariableState(string variableName) 
+    {
+        Ink.Runtime.Object variableValue = null;
+        dialogueVariables.variables.TryGetValue(variableName, out variableValue);
+        if (variableValue == null) 
+        {
+            Debug.LogWarning("Ink Variable was found to be null: " + variableName);
+        }
+        return variableValue;
+    }
+    public void LoadCharacterStatus()
+    {
+        foreach(KeyValuePair<string, float> status in  DialogueNPC.CharaterStatus)
+        {
+            Debug.Log("Setting up key:"+status.Key+"to value"+status.Value);
+            CurrentStory.variablesState[status.Key] = status.Value;
+        }
+        
+    }
+
 }
