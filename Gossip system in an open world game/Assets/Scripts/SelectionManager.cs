@@ -9,6 +9,7 @@ public class SelectionManager : MonoBehaviour
     public static SelectionManager Instance {set;get;}
     [SerializeField] private TextMeshProUGUI InteractionInfo;
     public bool onTarget;
+    public string TargetName = "";
 
 
     void Awake()
@@ -34,13 +35,16 @@ public class SelectionManager : MonoBehaviour
             if (selectedObj && selectedObj.IsPlayerInRange)
             {
                 InteractionInfo.transform.position = Input.mousePosition;
-                InteractionInfo.text = selectedObj.GetItemName();            
+                var name = selectedObj.GetItemName();
+                InteractionInfo.text = name;         
                 onTarget = true;
+                TargetName = name;
             }
             else
             {
                 InteractionInfo.text = "";
                 onTarget = false;
+                TargetName = "";
             }
 
         }
@@ -48,6 +52,7 @@ public class SelectionManager : MonoBehaviour
         {
             InteractionInfo.text = "";
             onTarget = false;
+            TargetName = "";
         }
     }
     public static SelectionManager GetInstance()

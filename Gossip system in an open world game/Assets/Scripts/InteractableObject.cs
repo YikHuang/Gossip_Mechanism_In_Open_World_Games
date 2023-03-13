@@ -17,7 +17,7 @@ public class InteractableObject : MonoBehaviour
     {
         DialogueManager dm = DialogueManager.GetInstance();
         SelectionManager sm = SelectionManager.GetInstance();
-        if(IsPlayerInRange && Input.GetKeyDown(KeyCode.Mouse0) && sm.onTarget && !dm.isDialoguePlaying)
+        if(ItemName==sm.TargetName && Input.GetKeyDown(KeyCode.Mouse0) && sm.onTarget && !dm.isDialoguePlaying)
         {
             //Debug.Log("Trigger Dialogue with"+ ItemName);
             dm.EnterDialogueMode(ItemName, InkJson);
