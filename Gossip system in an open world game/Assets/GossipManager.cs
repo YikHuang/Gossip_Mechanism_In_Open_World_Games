@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GossipManager : MonoBehaviour
 {
+
     public static GossipManager Instance;
     private IDictionary<string, GameObject> NPCs = new Dictionary<string, GameObject>();
 
@@ -30,16 +31,20 @@ public class GossipManager : MonoBehaviour
     }
     public void StartGossip(string Spreader, string Receiver)
     {
+        // Only gossip to one person now
         SocialSystem SpreaderSys = NPCs[Spreader].GetComponent<SocialSystem>();
         SocialSystem ReceiverSys = NPCs[Receiver].GetComponent<SocialSystem>();
-        foreach(string action in SpreaderSys.SocialActionHistory)
-        { 
-            //We can customize gossip discount based on NPC's trait in the future
-            // e.g. If a NPC has trait "Careful", then he will probably have a discount=0.1f,
-            // cuz he doesn't easily believe gossip.
+
+        foreach (string action in SpreaderSys.SocialActionHistory)
+        {
             ReceiverSys.AcceptGossip(action);
         }
         SpreaderSys.ClearSocialHistory();
+    }
+
+    public SocialSystem GetSpreaderSocialSystem(string Spreader) 
+    { 
+        return NPCs[Spreader].GetComponent<SocialSystem>();
     }
 
 }

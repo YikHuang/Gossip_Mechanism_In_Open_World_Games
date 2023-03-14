@@ -334,8 +334,19 @@ namespace StarterAssets
             thisAgent.SetDestination(Npc.transform.position);
             //Debug.Log(gameObject.name+" Start gossiping....");
             var NpcNames = new string[]{Npc.name, gameObject.name};
-            ThinkBubble.SetActive(true);
-            GossipManager.GetInstance().StartGossip(gameObject.name, Npc.name);
+
+			bool gossiping = PersonalityManager.GetInstance().DecideGossip(gameObject.name);
+			if (gossiping)
+			{
+				Debug.Log(gameObject.name + " is gossiping...");
+
+				ThinkBubble.SetActive(true);
+				GossipManager.GetInstance().StartGossip(gameObject.name, Npc.name);
+			}
+			else
+			{
+				Debug.Log(gameObject.name + " decided not to gossip");
+			}
             
         }
 	}
