@@ -23,7 +23,7 @@ What a surprise! Well you know, Gramma's dementia got worse... #speaker:Eric
 -> MakeUpWithClaireOne
 
 ===MakeUpWithClaireOne===
-Besides that, I'm actually having a disagreement with Claire. She is so pissed and wouldn't talk to me. Can you talk to her? #speaker: Eric
+Besides that, I'm actually having a disagreement with <color=\#F54D1C>Claire</color>. She is so pissed and wouldn't talk to me. Can you talk to her? #speaker: Eric
 
 + [Yes] I will talk to her right away! Thanks for your trust. #speaker: MainCharacter #SocialAction: Bonding 
      ~StartAQuest("MakeUpWithClaire", 1)
@@ -35,17 +35,17 @@ Besides that, I'm actually having a disagreement with Claire. She is so pissed a
 
 ===MakeUpWithClaireThree===
 Hey {name}, I just talked to Claire. She's deeply regretful and she want you to have this. #speaker: MainCharacter
-{Affinity >=5: ->Three_HighAffinity|->Three_LowAffinity}
+{Affinity >=50: ->Three_HighAffinity|->Three_LowAffinity}
 
 ===Three_HighAffinity===
 #SocialAction: Help
 Wow isn't that the superb "Diablo IV beta early access code"? I've  wanted it for so long... # speaker: Eric
-Thank you so much!! Please tell her I love her, and meet me at our spot at down. # speaker: Eric
+Thank you so much!! Please tell her I love her, and meet me at our spot at dawn. # speaker: Eric
 ~StartAQuest("MakeUpWithClaire", 3)
 ->DONE
 ===Three_LowAffinity===
 I appreciate her gift, but the fact she send you here only proves she doesn't care about me at all! #speaker: Eric
-Hint: Gain more affinity with {name} to proceed the story! #speaker:God
+<color=\#F5DA1C>Hint: Gain more affinity with {name} to proceed the story!</color> #speaker:God
 
 +[Restart the quest]
 ~StartAQuest("MakeUpWithClaire", 0)
