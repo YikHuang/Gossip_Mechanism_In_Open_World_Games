@@ -27,12 +27,15 @@ public class DialogueManager : MonoBehaviour
     private bool WaitForClicked = false;
     private const string SPEAKER_TAG = "speaker";
     private const string SOCIAL_ACTION_TAG = "SocialAction";
-    private string MAIN_CHARACTER_TAG = MainMenuScript.characterName; 
+    private string MAIN_CHARACTER_TAG; 
     public string NPCName = "";
     private SocialSystem DialogueNPC;
     private DialogueVariables dialogueVariables;
     private InkExternalFunctions InkEx;
-    
+    private bool canContinueToNextLine = false;
+    private Coroutine displayLineCoroutine;
+    private float typingSpeed = 0.02f;
+
     private void Awake()
     {
         if(Instance != null)
@@ -42,6 +45,8 @@ public class DialogueManager : MonoBehaviour
         Instance = this;
         dialogueVariables = new DialogueVariables(loadGlobalJson);
         InkEx = new InkExternalFunctions();
+        if (MainMenuScript.characterName==null) MAIN_CHARACTER_TAG = "You";
+        else MAIN_CHARACTER_TAG = MainMenuScript.characterName;
     }
     public static DialogueManager GetInstance()
     {
@@ -71,7 +76,7 @@ public class DialogueManager : MonoBehaviour
             ProceedStory();
             if(!GetSubmitPressed()) return;
         }
-        ContinueStory();
+        if(canContinueToNextLine) ContinueStory();
     }
     public void EnterDialogueMode(string CharName, TextAsset InkJson)
     {
@@ -107,13 +112,18 @@ public class DialogueManager : MonoBehaviour
         WaitForClicked = false;
         if(CurrentStory.canContinue)
         {
+            // set text for the current dialogue line
+            if (displayLineCoroutine != null) 
+            {
+                StopCoroutine(displayLineCoroutine);
+            }
             string c = CurrentStory.Continue();
             if(c.Length > 0)
             {
                 Debug.Log("Story can continue"+ c + c.Length);
-                DialogueText.text = c;
-                DisplayChoices();
+                //DialogueText.text = c;
                 HandleTags(CurrentStory.currentTags);
+                displayLineCoroutine = StartCoroutine(DisplayLine(c));
             }
         }
         else{
@@ -174,6 +184,52 @@ public class DialogueManager : MonoBehaviour
     {
         submitPressed = false;
     }
+     private IEnumerator DisplayLine(string line) 
+    {
+        // set the text to the full line, but set the visible characters to 0
+        DialogueText.text = line;
+        DialogueText.maxVisibleCharacters = 0;
+        // hide items while text is typing
+        //continueIcon.SetActive(false);
+        HideChoices();
+
+        canContinueToNextLine = false;
+
+        bool isAddingRichTextTag = false;
+
+        // display each letter one at a time
+        foreach (char letter in line.ToCharArray())
+        {
+            // if the submit button is pressed, finish up displaying the line right away
+            if (Input.GetKeyDown(KeyCode.Return)) 
+            {
+                DialogueText.maxVisibleCharacters = line.Length;
+                break;
+            }
+
+            // check for rich text tag, if found, add it without waiting
+            if (letter == '<' || isAddingRichTextTag) 
+            {
+                isAddingRichTextTag = true;
+                if (letter == '>')
+                {
+                    isAddingRichTextTag = false;
+                }
+            }
+            // if not rich text, add the next letter and wait a small time
+            else 
+            {
+                DialogueText.maxVisibleCharacters++;
+                yield return new WaitForSeconds(typingSpeed);
+            }
+        }
+
+        // actions to take after the entire line has finished displaying
+        //continueIcon.SetActive(true);
+        DisplayChoices();
+
+        canContinueToNextLine = true;
+    }
     private void DisplayChoices()
     {
         List<Choice> CurrentChoices = CurrentStory.currentChoices;
@@ -223,9 +279,12 @@ public class DialogueManager : MonoBehaviour
     }
     public void MakeChoice(int ChoiceIndex)
     {
-        CurrentStory.ChooseChoiceIndex(ChoiceIndex);
-        submitPressed = true;
-        HideChoices();
+        if(canContinueToNextLine)
+        {
+            CurrentStory.ChooseChoiceIndex(ChoiceIndex);
+            submitPressed = true;
+            HideChoices();
+        }  
     }
     public void ProceedStory()
     {
