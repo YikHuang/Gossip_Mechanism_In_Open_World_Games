@@ -8,14 +8,14 @@ using UnityEngine.SceneManagement;
 public class MainMenuScript : MonoBehaviour
 {
     public string gameScene;
-    public string characterName;
+    public static string characterName;
     public TMP_InputField nameInput;
     public GameObject CharacterCreationCanvas;
     public GameObject StartMenuCanvas;
 
     public void StoreName() {
         characterName = nameInput.text;
-        Debug.Log(characterName);
+        //Debug.Log(characterName);
     }
 
     public void SwitchScene() {

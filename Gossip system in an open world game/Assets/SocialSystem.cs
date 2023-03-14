@@ -18,38 +18,38 @@ public class SocialSystem : MonoBehaviour
     // Definition of impact on some social actions
     private IDictionary<string, float> Insult= new Dictionary<string, float>
     {
-        {"Affinity", -5f},
-        {"Trust", -5f},
-        {"Admiration", -5f}
+        {"Affinity", -50f},
+        {"Trust", -50f},
+        {"Admiration", -50f}
     };
     private IDictionary<string, float> Praise = new Dictionary<string, float>
     {
-        {"Affinity", 3f},
-        {"Trust", 3f}
+        {"Affinity", 30f},
+        {"Trust", 30f}
     };
     private IDictionary<string, float> Greeting = new Dictionary<string, float>
     {
-        {"Affinity", 1f}
+        {"Affinity", 10f}
     };
     private IDictionary<string, float> StraightForward = new Dictionary<string, float>
     {
-        {"Affinity", -2f}
+        {"Affinity", -20f}
     };
     private IDictionary<string, float> Bonding = new Dictionary<string, float>
     {
-        {"Affinity", 5f},
-        {"Trust", 3f}
+        {"Affinity", 50f},
+        {"Trust", 30f}
     };
     private IDictionary<string, float> Rejection = new Dictionary<string, float>
     {
-        {"Affinity", -2f},
-        {"Trust", -2f}
+        {"Affinity", -20f},
+        {"Trust", -20f}
     };
     private IDictionary<string, float> Help = new Dictionary<string, float>
     {
-        {"Affinity", 5f},
-        {"Trust", 5f},
-        {"Admiration", 5f}
+        {"Affinity", 50f},
+        {"Trust", 50f},
+        {"Admiration", 50f}
     };
     private IDictionary<string, IDictionary<string, float>> FunctionMap = new Dictionary<string, IDictionary<string, float>>();
     public List<string> SocialActionHistory = new List<string>();
@@ -81,11 +81,16 @@ public class SocialSystem : MonoBehaviour
     public bool StatusChange(string status, float amt)
     {
         if(!CharaterStatus.ContainsKey(status)) return false;
-        // if((CharaterStatus[status]+amt) < 0) //In case for negative vals
-        // {
-        //     CharaterStatus[status] = 0;
-        //     return true;
-        // }
+        if((CharaterStatus[status]+amt) > 100)
+        {
+            CharaterStatus[status] = 100;
+            return true;
+        }
+        if((CharaterStatus[status]+amt) < -100)
+        {
+            CharaterStatus[status] = -100;
+            return true;
+        }
 
         //Negative val is acceptable!
         CharaterStatus[status]+= amt;

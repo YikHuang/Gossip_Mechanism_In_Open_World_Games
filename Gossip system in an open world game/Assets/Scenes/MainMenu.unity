@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4045151, g: 0.2276314, b: 0.09670438, a: 1}
+  m_IndirectSpecularColor: {r: 0.40440086, g: 0.2276755, b: 0.096609086, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -401,6 +401,7 @@ GameObject:
   m_Component:
   - component: {fileID: 384496339}
   - component: {fileID: 384496338}
+  - component: {fileID: 384496340}
   m_Layer: 0
   m_Name: BackgroundMusic
   m_TagString: Untagged
@@ -519,6 +520,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &384496340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 384496337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b99c0a78a9d42369d395987fa9a978, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &405470648
 GameObject:
   m_ObjectHideFlags: 0
@@ -725,7 +738,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameScene: 
-  characterName: 
   nameInput: {fileID: 0}
   CharacterCreationCanvas: {fileID: 0}
   StartMenuCanvas: {fileID: 0}
@@ -2443,7 +2455,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameScene: SampleScene
-  characterName: 
   nameInput: {fileID: 620847398}
   CharacterCreationCanvas: {fileID: 173882931}
   StartMenuCanvas: {fileID: 810036485}
