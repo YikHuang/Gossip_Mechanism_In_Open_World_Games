@@ -27,8 +27,8 @@ public class DialogueManager : MonoBehaviour
     private bool WaitForClicked = false;
     private const string SPEAKER_TAG = "speaker";
     private const string SOCIAL_ACTION_TAG = "SocialAction";
-    private  string MAIN_CHARACTER_TAG = "You"; 
-    public string NPCName="";
+    private string MAIN_CHARACTER_TAG = MainMenuScript.characterName; 
+    public string NPCName = "";
     private SocialSystem DialogueNPC;
     private DialogueVariables dialogueVariables;
     private InkExternalFunctions InkEx;

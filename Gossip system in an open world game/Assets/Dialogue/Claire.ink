@@ -49,5 +49,6 @@ Actually there is. If you can bring this "Diablo IV beta early access code" to E
 #SocialAction: Help
 He really loved your gift. We did it! He also wants you to meet him at "your spot" at down. #speaker: MainCharacter
 Can't thank you enough...Let me know if you need anything! #speaker: Claire
+~StartAQuest("MakeUpWithClaire", 5) 
 -
 ->END
