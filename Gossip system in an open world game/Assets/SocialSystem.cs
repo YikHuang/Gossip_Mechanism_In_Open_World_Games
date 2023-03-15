@@ -58,6 +58,7 @@ public class SocialSystem : MonoBehaviour
     static float STATUS_DISPLAY_TIME = 5f;
     private float CountDownTime = 0;
 
+
     private void Start()
     {
         //Register Social Actions here:
@@ -81,7 +82,8 @@ public class SocialSystem : MonoBehaviour
     public bool StatusChange(string status, float amt)
     {
         if(!CharaterStatus.ContainsKey(status)) return false;
-        if((CharaterStatus[status]+amt) > 100)
+
+        if ((CharaterStatus[status]+amt) > 100)
         {
             CharaterStatus[status] = 100;
             return true;
@@ -101,9 +103,21 @@ public class SocialSystem : MonoBehaviour
         var Func = FunctionMap[Action];
         foreach(var r in Func)
         {
-            if(!isGossip) Debug.Log(gameObject.name+" Accept action:"+Action+" Inludes key"+r.Key+"val:"+r.Value*GossipDiscount);   
-            else Debug.Log(gameObject.name+"Accept Gossip Action:"+Action+" Inludes key"+r.Key+"val:"+r.Value*GossipDiscount);   
-            if (!StatusChange(r.Key, r.Value*GossipDiscount))
+            float amt;
+
+            if (!isGossip)
+            {
+                amt = PersonalityManager.GetInstance().GenerateNpcStatusFromDirectAction(gameObject.name, r.Key, r.Value);
+                Debug.Log(gameObject.name + " Accept action:" + Action + " Inludes key" + r.Key + "val:" + r.Value * GossipDiscount);
+            }
+            else 
+            {
+                amt = PersonalityManager.GetInstance().GenerateNpcStatusFromGossip(gameObject.name, r.Key, r.Value * GossipDiscount);
+                Debug.Log(gameObject.name + "Accept Gossip Action:" + Action + " Inludes key" + r.Key + "val:" + r.Value * GossipDiscount); 
+            }
+
+
+            if (!StatusChange(r.Key, amt))
             {
                 Debug.LogWarning("Key doesn't exists in status table! key:"+r.Key);  
             }       
