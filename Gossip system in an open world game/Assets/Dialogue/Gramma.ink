@@ -3,14 +3,7 @@ VAR name = "Gramma"
 VAR Affinity = 0
 VAR Admiration = 0
 VAR Trust = 0
-// { CheckAQuest("RunErrandsForDousey"):
-// - 0: ->MeetNGreet
-// - 1: ->RunErrandsForDouseyOne
-// - 2: ->RunErrandsForDouseyTwo
-// - 3: ->RunErrandsForDouseyThree
-// - 11: -> BecameEnemy
-// - else: ->WaitForResponses
-// }
+
 ->MeetNGreet
 //We need to pass MainCharacter's name in here!
 === MeetNGreet ===
@@ -19,7 +12,7 @@ Hi sweetie, what a nice weather! # speaker: Gramma
 {CheckAQuest("RunErrandsForDousey") == 3: ->ChooceAction}
 { CheckAQuest("RunErrandsForGramma"):
 - 0: ->RunErrandsForGrammaOne
-- 1: ->RunErrandsForGrammaTwo
+- 2: ->RunErrandsForGrammaThree
 - else: ->WaitForResponses
 }
 -> DONE
@@ -29,7 +22,7 @@ What are you here for? #speaker: Gramma
 ~ temp Status =CheckAQuest("RunErrandsForGramma") 
 + [Steal from {name}!] ->RunErrandsForDouseyThree
 + {Status == 0} [Chit-chat with {name}] -> RunErrandsForGrammaOne
-+ {Status > 0} [Run errands for {name}] -> RunErrandsForGrammaTwo
++ {Status== 2} [Run errands for {name}] -> RunErrandsForGrammaThree
 
 ->DONE
 ===RunErrandsForDouseyThree===
@@ -57,10 +50,11 @@ However, I can barely see anything...Can you tell him to come for the dinner? #s
 -
 ->DONE
 
-===RunErrandsForGrammaTwo===
-Haven't implemented anything yet.
-
+===RunErrandsForGrammaThree===
+Thanks for your help sweetie. Wanna try some <color=\#20C149>casserole</color>? #speaker: Gramma #SocialAction: Help 
+~StartAQuest("RunErrandsForGramma", 3)
 ->DONE
+
 ===WaitForResponses===
 ... #speaker: Gramma
 ->DONE

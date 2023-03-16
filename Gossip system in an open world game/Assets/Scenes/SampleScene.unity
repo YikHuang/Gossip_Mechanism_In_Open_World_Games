@@ -12901,7 +12901,7 @@ MonoBehaviour:
   IsNpcInRange: 0
   Npc: {fileID: 0}
   NpcPos: {x: 0, y: 0, z: 0}
-  InkJson: {fileID: 0}
+  InkJson: {fileID: 4900000, guid: 8b8de88979a934fb69e18d37f1634846, type: 3}
   NpcLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -19001,7 +19001,7 @@ MonoBehaviour:
   IsNpcInRange: 0
   Npc: {fileID: 0}
   NpcPos: {x: 0, y: 0, z: 0}
-  InkJson: {fileID: 0}
+  InkJson: {fileID: 4900000, guid: c4329fbefacf94141aa24364634d4ca7, type: 3}
   NpcLayer:
     serializedVersion: 2
     m_Bits: 8
