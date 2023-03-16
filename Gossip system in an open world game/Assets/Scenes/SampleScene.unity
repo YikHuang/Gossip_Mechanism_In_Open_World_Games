@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.4045151, g: 0.2276314, b: 0.09670438, a: 1}
+  m_IndirectSpecularColor: {r: 0.40440086, g: 0.2276755, b: 0.096609086, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -7299,7 +7299,7 @@ MonoBehaviour:
   IsNpcInRange: 0
   Npc: {fileID: 0}
   NpcPos: {x: 0, y: 0, z: 0}
-  InkJson: {fileID: 0}
+  InkJson: {fileID: 4900000, guid: 35fa530b3fdd14470b1a87204352896f, type: 3}
   NpcLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -20752,7 +20752,7 @@ MonoBehaviour:
   IsNpcInRange: 0
   Npc: {fileID: 0}
   NpcPos: {x: 0, y: 0, z: 0}
-  InkJson: {fileID: 0}
+  InkJson: {fileID: 4900000, guid: f68e29295c5184451a114c9e4b7fb38f, type: 3}
   NpcLayer:
     serializedVersion: 2
     m_Bits: 8

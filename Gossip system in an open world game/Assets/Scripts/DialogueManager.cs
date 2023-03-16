@@ -90,7 +90,6 @@ public class DialogueManager : MonoBehaviour
         DialogueNPC = GameObject.Find(NPCName).GetComponent<SocialSystem>();
         LoadCharacterStatus();
         float temp = (float)CurrentStory.variablesState["Affinity"];
-        Debug.Log("After load:"+ temp);
 
         dialogueVariables.StartListening(CurrentStory);
         InkEx.Bind(CurrentStory);
@@ -201,11 +200,11 @@ public class DialogueManager : MonoBehaviour
         foreach (char letter in line.ToCharArray())
         {
             // if the submit button is pressed, finish up displaying the line right away
-            if (Input.GetKeyDown(KeyCode.Return)) 
-            {
-                DialogueText.maxVisibleCharacters = line.Length;
-                break;
-            }
+            // if (Input.GetKeyDown(KeyCode.Return)) 
+            // {
+            //     DialogueText.maxVisibleCharacters = line.Length;
+            //     break;
+            // }
 
             // check for rich text tag, if found, add it without waiting
             if (letter == '<' || isAddingRichTextTag) 

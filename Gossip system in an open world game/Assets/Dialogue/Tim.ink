@@ -2,7 +2,9 @@
 INCLUDE globals.ink
 VAR name = "Timmy"
 VAR Affinity = 0
-{Affinity >= 3: ->mid_affinity | -> main}
+VAR Admiration = 0
+VAR Trust = 0
+{Affinity >= 30: ->mid_affinity | -> main}
 
 === main ===
  Hi there, what's up? #speaker:Timmy
