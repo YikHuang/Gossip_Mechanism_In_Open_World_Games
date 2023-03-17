@@ -11,66 +11,66 @@ public class PersonalityManager : MonoBehaviour
     public IDictionary<string, IDictionary<string, float>> PersonalityDictionary;
 
     public IDictionary<string, float> Mousey = new Dictionary<string, float>
-    {
-        {"Openness", 0.7f},
-        {"Conscientiousness", 0.6f},
-        {"Extraversion", 0.5f},
-        {"Agreeableness", 0.8f},
-        {"Neuroticism", 0.2f}
-    };
-
-    public IDictionary<string, float> Doozy = new Dictionary<string, float>
-    {
-        {"Openness", 0.2f},
-        {"Conscientiousness", 0.1f},
-        {"Extraversion", 0.3f},
+    {//A character who lives in his own world
+        {"Openness", 0.5f},
+        {"Conscientiousness", 0.5f},
+        {"Extraversion", 0.2f},
         {"Agreeableness", 0.2f},
-        {"Neuroticism", 0.9f}
-    };
-
-    public IDictionary<string, float> Timmy = new Dictionary<string, float>
-    {
-        {"Openness", 0.5f},
-        {"Conscientiousness", 0.6f},
-        {"Extraversion", 0.6f},
-        {"Agreeableness", 0.7f},
-        {"Neuroticism", 0.4f}
-    };
-
-    public IDictionary<string, float> Claire = new Dictionary<string, float>
-    {
-        {"Openness", 0.6f},
-        {"Conscientiousness", 0.7f},
-        {"Extraversion", 0.8f},
-        {"Agreeableness", 0.4f},
-        {"Neuroticism", 0.3f}
-    };
-
-    public IDictionary<string, float> Elviss = new Dictionary<string, float>
-    {
-        {"Openness", 0.1f},
-        {"Conscientiousness", 0.9f},
-        {"Extraversion", 0.1f},
-        {"Agreeableness", 0.8f},
-        {"Neuroticism", 0.2f}
-    };
-
-    public IDictionary<string, float> Eric = new Dictionary<string, float>
-    {
-        {"Openness", 0.5f},
-        {"Conscientiousness", 0.7f},
-        {"Extraversion", 0.3f},
-        {"Agreeableness", 0.9f},
         {"Neuroticism", 0.5f}
     };
 
-    public IDictionary<string, float> Gramma = new Dictionary<string, float>
-    {
-        {"Openness", 0.1f},
-        {"Conscientiousness", 0.9f},
-        {"Extraversion", 0.6f},
-        {"Agreeableness", 0.7f},
+    public IDictionary<string, float> Doozy = new Dictionary<string, float>
+    {//Doozy is supposed to be a selfish, irritable character who disregard the morality.
+        {"Openness", 0.8f}, //Conservative people won't commit crimes
+        {"Conscientiousness", 0.2f},
+        {"Extraversion", 0.4f},
+        {"Agreeableness", 0.2f},
+        {"Neuroticism", 0.7f}
+    };
+
+    public IDictionary<string, float> Timmy = new Dictionary<string, float>
+    {//A mediocre, quiet, and responsible person.
+        {"Openness", 0.5f},
+        {"Conscientiousness", 0.8f},
+        {"Extraversion", 0.3f},
+        {"Agreeableness", 0.8f},
+        {"Neuroticism", 0.5f}
+    };
+
+    public IDictionary<string, float> Claire = new Dictionary<string, float>
+    {//A dramatic, talktive, emotional lady
+        {"Openness", 0.5f},
+        {"Conscientiousness", 0.5f},
+        {"Extraversion", 0.8f},
+        {"Agreeableness", 0.6f},
+        {"Neuroticism", 0.9f}
+    };
+
+    public IDictionary<string, float> Elviss = new Dictionary<string, float>
+    { // A responsible, considerate, cautious, highly socialized character who takes care of MainCharacter
+        {"Openness", 0.7f},
+        {"Conscientiousness", 1f},
+        {"Extraversion", 0.5f},
+        {"Agreeableness", 0.8f},
         {"Neuroticism", 0.1f}
+    };
+
+    public IDictionary<string, float> Eric = new Dictionary<string, float>
+    { //???
+        {"Openness", 0.5f},
+        {"Conscientiousness", 0.9f},
+        {"Extraversion", 0.3f},
+        {"Agreeableness", 0.7f},
+        {"Neuroticism", 0.6f}
+    };
+
+    public IDictionary<string, float> Gramma = new Dictionary<string, float>
+    { //A nerved, conservative, and agreeable old lady!
+        {"Openness", 0.1f},
+        {"Conscientiousness", 0.8f},
+        {"Extraversion", 0.5f},
+        {"Agreeableness", 0.9f},
+        {"Neuroticism", 0.9f}
     };
 
 
