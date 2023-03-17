@@ -343,7 +343,7 @@ public class PersonalityManager : MonoBehaviour
         // Gossip Decision
         float gossipProb = (conscientiousnessProb + extraversionProb + neuroticismProb) / 3;
         float rand = Random.Range(0f, 1f);
-
+        Debug.Log(npcName+" gossipProb is" + gossipProb);
         if (rand <= gossipProb)
         {
             return true;
