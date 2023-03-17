@@ -21,10 +21,14 @@ public class InkExternalFunctions
             if(Quests.ContainsKey(QuestName)) return Quests[QuestName];
             else return 0;
         });
+        curStory.BindExternalFunction("GetPlayerName", () => {
+            return MainMenuScript.characterName;
+        });
     }
     public void Unbind(Story curStory)
     {
         curStory.UnbindExternalFunction("StartAQuest");
         curStory.UnbindExternalFunction("CheckAQuest");
+        curStory.UnbindExternalFunction("GetPlayerName");
     }
 }

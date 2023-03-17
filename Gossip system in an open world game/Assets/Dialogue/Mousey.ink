@@ -30,7 +30,7 @@ Ohh! Aren't you the <color=\#F5DA1C>legendary boy</color> that everyone is talki
 ->DONE
 
 ===HighTrustQuest===
-Here comes my favorite person in town! #speaker: Mousey
+{GetPlayerName()} Here comes my favorite person in town! #speaker: Mousey
 +[I love you too!] #speaker: MainCharacter
 +[Do I know you??] #speaker: MainCharacter
 -

@@ -14,7 +14,7 @@ VAR Trust = 0
 === MeetNGreet ===
  Hi there, what's up? #speaker:Timmy
  + [It's {name}!] Long time no see {name}, miss you so bad! # speaker: MainCharacter #SocialAction: Praise
-    I miss you too! # speaker: Timmy
+    I miss you too {GetPlayerName()}! # speaker: Timmy
  + [...Nerd!] (Speaking something offensive to {name}) # speaker: MainCharacter #SocialAction: Insult
     ... #speaker: Timmy
 -
