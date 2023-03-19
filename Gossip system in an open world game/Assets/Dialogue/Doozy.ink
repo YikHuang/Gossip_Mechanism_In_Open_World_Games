@@ -35,7 +35,7 @@ She took my precious <color=\#20C149>Necklace</color> and refused to return! Wha
 I want you to steal it for me. I'll reward you with $500. What do you say?# speaker: Doozy
 
 + [Yes] If it's like you said, I'll help you out. #speaker: MainCharacter #SocialAction: Bonding 
-    I know you are a good guy! Listen up. She is half blind and half deaf, you have a good chance not to get caught. Just go to her!
+    I know you are a good guy! Listen up. She is half blind and half deaf, you have a good chance not to get caught. Just go to her! #speaker: Doozy
     ~StartAQuest("RunErrandsForDousey", 3)
     //-> RunErrandsForDouseyThree
 + [Let me talk to Gramma first] I'm pretty sure it's a misunderstanding. Let me talk to her. #speaker: MainCharacter #SocialAction: Rejection
