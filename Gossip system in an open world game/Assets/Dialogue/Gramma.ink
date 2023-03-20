@@ -3,7 +3,7 @@ VAR name = "Gramma"
 VAR Affinity = 0
 VAR Admiration = 0
 VAR Trust = 0
-
+//VAR status = 
 ->MeetNGreet
 //We need to pass MainCharacter's name in here!
 === MeetNGreet ===
@@ -18,12 +18,14 @@ Hi sweetie, what a nice weather! # speaker: Gramma
 -> DONE
 
 ===ChooceAction===
+~temp status = CheckAQuest("RunErrandsForGramma")
 What are you here for? #speaker: Gramma
-~ temp Status =CheckAQuest("RunErrandsForGramma") 
-+ [Steal from {name}!] ->RunErrandsForDouseyThree
-+ {Status == 0} [Chit-chat with {name}] -> RunErrandsForGrammaOne
-+ {Status== 2} [Run errands for {name}] -> RunErrandsForGrammaThree
-
++ [Steal from {name}!] 
+    ->RunErrandsForDouseyThree
++ {status == 0} [Chit-chat with {name}] 
+    -> RunErrandsForGrammaOne
++ {status== 2} [Run errands for {name}] 
+    -> RunErrandsForGrammaThree
 ->DONE
 ===RunErrandsForDouseyThree===
 (Carefully reach your hand to {name}'s pocket...) #speaker: 

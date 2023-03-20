@@ -117,7 +117,7 @@ public class DialogueManager : MonoBehaviour
                 StopCoroutine(displayLineCoroutine);
             }
             string c = CurrentStory.Continue();
-            if(c.Length > 0)
+            if(c.Length > 0 && c != "\n" && c != "\r\n")
             {
                 Debug.Log("Story can continue"+ c + c.Length);
                 //DialogueText.text = c;
