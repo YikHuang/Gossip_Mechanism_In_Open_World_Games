@@ -51,7 +51,7 @@ Get out of my face! Never let me see you again!  # speaker: Doozy
 
 ===RunErrandsForDouseyFour=== //successfully stole it
 {name} I got it I got it!! She didn't even notice just like you said. #speaker: MainCharacter #SocialAction: help
-Great job kid! Now we're best buddies! Let me know if you anything in the future. # speaker: Doozy
+Great job kid! Now we're best buddies! Let me know if you need anything in the future. # speaker: Doozy
 ~StartAQuest("RunErrandsForDousey", 12)
 ->DONE
 
