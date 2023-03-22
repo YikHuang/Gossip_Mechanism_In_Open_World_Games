@@ -14,6 +14,9 @@
 # Other info
 1. View FinalReport_SunsetValley for Susnet Valley related paper "Gossip Mechanism in the Open World Game: Sunset Valley"
 
+# DEMO Video
+https://www.youtube.com/watch?v=Yxw7TbOKPsk&t=1s
+
 
 Please kindly email to fhliao@ucdavis.edu or yikhuang@ucdavis.edu for questions.
 Enjoy!
